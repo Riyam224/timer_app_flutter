@@ -12,7 +12,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // todo
-  var currentTime = '';
+  var currentTime;
   @override
   // todo
   void initState() {
@@ -27,9 +27,11 @@ class _HomeViewState extends State<HomeView> {
 
   void updateTime() {
     // todo current date
-
+    // var now = DateTime.now();
+    // var format = DateFormat.jms().format(now);
     setState(() {
       currentTime = DateTime.now().toString().substring(11, 19);
+      // currentTime = format.toString().substring(11, 19);
     });
   }
 
@@ -49,4 +51,12 @@ class _HomeViewState extends State<HomeView> {
       )),
     );
   }
+}
+
+class DateFormat {
+  jm() {}
+
+  format(currentTime) {}
+
+  static jms() {}
 }
