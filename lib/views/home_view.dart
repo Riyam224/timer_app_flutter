@@ -12,7 +12,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // todo
-  String currentTime = '';
+  var currentTime = '';
   @override
   // todo
   void initState() {
