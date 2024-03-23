@@ -1,62 +1,79 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  // todo
-  var currentTime;
-  @override
-  // todo
-  void initState() {
-    super.initState();
-    // todo timer
-
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      updateTime();
-    });
-  }
-  // todo
-
-  void updateTime() {
-    // todo current date
-    // var now = DateTime.now();
-    // var format = DateFormat.jms().format(now);
-    setState(() {
-      currentTime = DateTime.now().toString().substring(11, 19);
-      // currentTime = format.toString().substring(11, 19);
-    });
-  }
-
-  // todo
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 8, 8, 4),
-      body: Center(
-          child: Text(
-        '$currentTime',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
+        appBar: AppBar(
+          title: const Text(
+            'Tune App',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
         ),
-      )),
-    );
+        body: Column(
+          children: [
+            ColorWidget(
+              color: Color.fromARGB(255, 222, 133, 38),
+              sound: 'sounds/note1.wav',
+            ),
+            ColorWidget(
+              color: Color.fromARGB(255, 237, 216, 57),
+              sound: 'sounds/note2.wav',
+            ),
+            ColorWidget(
+              color: Color.fromARGB(255, 57, 108, 14),
+              sound: 'sounds/note3.wav',
+            ),
+            ColorWidget(
+              color: Color.fromARGB(255, 38, 182, 222),
+              sound: 'sounds/note4.wav',
+            ),
+            ColorWidget(
+              color: Color.fromARGB(255, 23, 36, 168),
+              sound: 'sounds/note5.wav',
+            ),
+            ColorWidget(
+              color: Color.fromARGB(255, 32, 3, 3),
+              sound: 'sounds/note6.wav',
+            ),
+            ColorWidget(
+              color: Color.fromARGB(255, 48, 12, 87),
+              sound: 'sounds/note7.wav',
+            ),
+          ],
+        ));
   }
 }
+// todo category widget
 
-class DateFormat {
-  jm() {}
+class ColorWidget extends StatelessWidget {
+  ColorWidget({super.key, required this.color, required this.sound});
 
-  format(currentTime) {}
+  Color color;
+  String sound;
 
-  static jms() {}
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          final player = AudioPlayer();
+          player.play(
+            AssetSource(sound),
+          );
+        },
+        child: Container(
+          width: double.infinity,
+          height: 90,
+          color: color,
+        ),
+      ),
+    );
+  }
 }
